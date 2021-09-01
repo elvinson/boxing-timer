@@ -7,82 +7,66 @@
             <!-- Выбранный профиль -->
             <span
                 v-show="profile.selected" 
-                class="tag is-primary is-light selected-profile">Выбран</span>
-
-            <!-- Имя -->
-            <div class="field">
-                <label class="label">Имя</label>
-                <div class="control">
-                    <input v-model="profile.name" class="input" placeholder="Text input">
-                </div>
-            </div>
-            <!-- Кол-во раундов -->
-            <div class="field">
-                <label class="label">Кол-во раундов</label>
-                <div class="control">
-                    <input v-model="profile.roundsCount" class="input" placeholder="Кол-во раундов">
-                </div>
-            </div>
-            <!-- Время раунда -->
-            <div class="field">
-                <label class="label">Время раунда</label>
-                <div class="control">
-                    <input v-model="profile.roundTime" class="input" placeholder="Время раунда">
-                </div>
-            </div>
-            <!-- Время перерыва -->
-            <div class="field">
-                <label class="label">Время перерыва</label>
-                <div class="control">
-                    <input v-model="profile.restTime" class="input" placeholder="Время перерыва">
-                </div>
-            </div>
-            <!-- Время подготовки -->
-            <div class="field">
-                <label class="label">Время подготовки</label>
-                <div class="control">
-                    <input v-model="profile.preparationTime" class="input" placeholder="Время подготовки">
-                </div>
-            </div>
-            <!-- Цвет фона раунда -->
-            <div class="field">
-                <label class="label">Цвет фона раунда</label>
-                <div class="control">
-                    <input v-model="profile.backgroundOfRound" class="input" placeholder="Цвет фона раунда">
-                </div>
-            </div>
-            <!-- Цвет фона перерыва -->
-            <div class="field">
-                <label class="label">Цвет фона перерыва</label>
-                <div class="control">
-                    <input v-model="profile.backgroundOfBreak" class="input" placeholder="Цвет фона перерыва">
-                </div>
-            </div>
-            <!-- Цвет фона конца раунда  -->
-            <div class="field">
-                <label class="label">Цвет фона конца раунда</label>
-                <div class="control">
-                    <input v-model="profile.backgroundOfRoundEnding" class="input" placeholder="Цвет фона конца раунда">
-                </div>
+                class="tag is-primary is-light selected-profile">Текущий профиль</span>
+            
+            <div class="content">
+                <table class="profile-settings table is-bordered is-striped">
+                    <tbody>
+                        <tr>
+                            <td>Имя профиля</td>
+                            <td>{{ profile.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Кол-во раундов</td>
+                            <td>{{ profile.roundsCount }}</td>
+                        </tr>
+                        <tr>
+                            <td>Время раунда</td>
+                            <td>{{ profile.roundTime }}</td>
+                        </tr>
+                        <tr>
+                            <td>Время перерыва</td>
+                            <td>{{ profile.restTime }}</td>
+                        </tr>
+                        <tr>
+                            <td>Время подготовки</td>
+                            <td>{{ profile.preparationTime }}</td>
+                        </tr>
+                        <tr>
+                            <td>Цвет фона раунда</td>
+                            <td>{{ profile.backgroundOfRound }}</td>
+                        </tr>
+                        <tr>
+                            <td>Цвет фона перерыва</td>
+                            <td>{{ profile.backgroundOfBreak }}</td>
+                        </tr>
+                        <tr>
+                            <td>Цвет фона конца раунда</td>
+                            <td>{{ profile.backgroundOfRoundEnding }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- Кнопки управления профилем -->
             <div class="buttons">
-                <button v-on:click="deleteProfile(profile.id)" class="button is-danger is-fullwidth block">Удалить</button>
-                <button v-on:click="selectProfile(profile.id)" class="button is-primary is-fullwidth block">Выбрать</button>
+                <button 
+                    v-show="!profile.selected"
+                    v-on:click="selectProfile(profile.id)"
+                    class="button is-primary is-fullwidth block">Выбрать</button>
+                <router-link 
+                    :to="{ name: 'settings', params: { id: profile.id } }" 
+                    class="button is-primary is-fullwidth block">Настройки</router-link>
             </div>
         </div>
 
         <!-- Кнопки -->
-         <div class="buttons">
+         <!-- <div class="buttons">
             <button v-on:click="createNewProfile" class="button is-success is-large is-fullwidth block">Добавить новый профиль</button>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
-    // import { mapState } from 'vuex';
-
     export default {
         computed: {
             profiles() {
@@ -127,5 +111,9 @@
     .selected-profile {
         position: absolute;
         right: 1.25rem;
+    }
+    .profile-settings tr td:first-child {
+        width: 20%;
+        font-weight: bold;
     }
 </style>

@@ -1,4 +1,4 @@
-# boxing-timer
+# Боксерский таймер
 
 ## Project setup
 ```

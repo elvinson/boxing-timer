@@ -53,6 +53,9 @@ export default new Vuex.Store({
         },
         profilesCount(state) {
             return state.profiles.length;
+        },
+        getProfileById(state) {
+            return id => state.profiles.find(profile => profile.id == id);
         }
     }
 });
